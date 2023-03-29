@@ -20,7 +20,7 @@ class _AdminSlidersScreenState extends State<AdminSlidersScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller.taxisDataSource = AdminSlidersDataSource(_controller);
+    _controller.slidersDataSource = AdminSlidersDataSource(_controller);
   }
 
   @override
@@ -40,7 +40,7 @@ class _AdminSlidersScreenState extends State<AdminSlidersScreen> {
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () {
-                _controller.taxisDataSource.setNextView();
+                _controller.slidersDataSource.setNextView();
               },
             ),
           ],
@@ -56,7 +56,7 @@ class _AdminSlidersScreenState extends State<AdminSlidersScreen> {
             child: ConstrainedBox(
               constraints: BoxConstraints(minWidth: Get.width),
               child: CustomDataTableAdvanced(
-                source: _controller.taxisDataSource,
+                source: _controller.slidersDataSource,
                 columns: [
                   DataColumn(
                     label: Text('Image'.tr),

@@ -19,13 +19,12 @@ class AdminSlidersController extends GetxController {
 
   final TextEditingController controllerSearch = TextEditingController();
 
-  late AdminSlidersDataSource taxisDataSource;
-  final countTaxi = 0.obs;
+  late AdminSlidersDataSource slidersDataSource;
 
   deleteSlider({required SliderModel model}) async {
     Utils.showLoadingDialog();
     await ReferenceFirebase.SLIDERS.doc(model.id).delete();
-    taxisDataSource.setNextView();
+    slidersDataSource.setNextView();
     Utils.hideLoadingDialog();
   }
 
@@ -93,7 +92,7 @@ class AdminSlidersController extends GetxController {
                     onPressed: () async {
                       FocusScope.of(context).requestFocus(FocusNode());
                       await ReferenceFirebase.SLIDERS.add(sliderModel);
-                      taxisDataSource.setNextView();
+                      slidersDataSource.setNextView();
                       Get.back();
                     },
                   )

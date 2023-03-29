@@ -22,6 +22,7 @@ class UserOrderController extends GetxController {
     Utils.showLoadingDialog();
     await ReferenceFirebase.ORDERS.add(OrderModel(
       userId: ReferenceFirebase.GET_USER(sharedPrefsClient.id),
+      phoneNumber: sharedPrefsClient.phoneNumber,
       quantity: quantity.value,
       price: price,
       totalPrice: totalPrice.value,

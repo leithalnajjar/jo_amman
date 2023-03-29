@@ -3,6 +3,7 @@ import 'package:jo_amman/config/shared_prefs_client.dart';
 import 'package:jo_amman/config/utils.dart';
 import 'package:jo_amman/controllers/admin/admin_home_controller.dart';
 import 'package:jo_amman/ui/screens/admin/config/admin_config_screen.dart';
+import 'package:jo_amman/ui/screens/admin/orders/admin_orders_screen.dart';
 import 'package:jo_amman/ui/screens/admin/sliders/admin_sliders_screen.dart';
 import 'package:jo_amman/ui/screens/auth/sign_in_screen.dart';
 import 'package:jo_amman/ui/widgets/custom_widget.dart';
@@ -40,7 +41,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(5.r),
                   onTap: () {
-                    // Get.to(() => const ScientificJournalsScreen());
+                    Get.to(() => const AdminOrdersScreen());
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 2.w),

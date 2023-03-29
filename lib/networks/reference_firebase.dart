@@ -54,6 +54,26 @@ class ReferenceFirebase {
       },
       toFirestore: (model, options) => model.toJson());
 
+  //ignore: non_constant_identifier_names
+  static Query<OrderModel> GET_ORDERS_PAGINATION({String search = "", int limit = 10, DocumentSnapshot<OrderModel>? startAt}) => startAt == null
+      ? FirebaseFirestore.instance.collection('orders').where("is_deleted", isEqualTo: false).where("search_option", arrayContains: search).orderBy('date', descending: true).limit(limit).withConverter<OrderModel>(
+          fromFirestore: (snapshot, options) {
+            var model = OrderModel.fromJson(snapshot.data()!);
+            model.id = snapshot.id;
+            return model;
+          },
+          toFirestore: (model, options) => model.toJson())
+      : FirebaseFirestore.instance.collection('orders').where("is_deleted", isEqualTo: false).where("search_option", arrayContains: search).orderBy('date', descending: true).startAtDocument(startAt).limit(limit).withConverter<OrderModel>(
+          fromFirestore: (snapshot, options) {
+            var model = OrderModel.fromJson(snapshot.data()!);
+            model.id = snapshot.id;
+            return model;
+          },
+          toFirestore: (model, options) => model.toJson());
+
+  //ignore: non_constant_identifier_names
+  static AggregateQuery GET_COUNT_ORDERS({String search = ""}) => FirebaseFirestore.instance.collection('orders').where("is_deleted", isEqualTo: false).where("search_option", arrayContains: search).count();
+
   static CollectionReference SLIDERS = FirebaseFirestore.instance.collection('sliders').withConverter<SliderModel>(
       fromFirestore: (snapshot, options) {
         var model = SliderModel.fromJson(snapshot.data()!);
