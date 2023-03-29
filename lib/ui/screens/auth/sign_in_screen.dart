@@ -1,5 +1,6 @@
 import 'package:jo_amman/config/constant.dart';
 import 'package:jo_amman/config/shared_prefs_client.dart';
+import 'package:jo_amman/config/utils.dart';
 import 'package:jo_amman/config/validation.dart';
 import 'package:jo_amman/controllers/auth/sign_in_controller.dart';
 import 'package:jo_amman/ui/widgets/custom_widget.dart';
@@ -23,8 +24,8 @@ class _SignInScreenState extends State<SignInScreen> {
       child: CustomSingleChildScrollView(
         padding: EdgeInsets.zero,
         child: Container(
-          height: Get.height,
-          width: Get.width,
+          height: Utils.height,
+          width: Utils.width,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background.png'),

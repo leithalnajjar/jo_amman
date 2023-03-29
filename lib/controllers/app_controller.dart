@@ -2,10 +2,13 @@ import 'package:jo_amman/config/constant.dart';
 import 'package:jo_amman/config/shared_prefs_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:jo_amman/models/config_model.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AppController extends GetxController {
   static AppController get to => Get.isRegistered<AppController>() ? Get.find<AppController>() : Get.put(AppController());
+
+  final config = ConfigModel.fromJson({}).obs;
 
   init() {
     /// Version
@@ -35,17 +38,18 @@ class AppController extends GetxController {
     }
 
     /// Language
-    if (sharedPrefsClient.language == "") {
-      if (Get.deviceLocale == null) {
-        sharedPrefsClient.language = 'ar';
-      } else {
-        String language = Get.deviceLocale!.languageCode;
-        if (language != 'en' && language != 'ar') {
-          sharedPrefsClient.language = 'ar';
-        } else {
-          sharedPrefsClient.language = language;
-        }
-      }
-    }
+    sharedPrefsClient.language = 'ar';
+    // if (sharedPrefsClient.language == "") {
+    //   if (Get.deviceLocale == null) {
+    //     sharedPrefsClient.language = 'ar';
+    //   } else {
+    //     String language = Get.deviceLocale!.languageCode;
+    //     if (language != 'en' && language != 'ar') {
+    //       sharedPrefsClient.language = 'ar';
+    //     } else {
+    //       sharedPrefsClient.language = language;
+    //     }
+    //   }
+    // }
   }
 }

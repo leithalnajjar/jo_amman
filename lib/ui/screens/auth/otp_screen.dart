@@ -48,8 +48,8 @@ class _OtpScreenState extends State<OtpScreen> {
               padding: EdgeInsets.zero,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                height: Get.height ,
-                width: Get.width,
+                height: Utils.height,
+                width: Utils.width,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/background.png'),
@@ -96,7 +96,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       CustomButton(
                         child: Text('Verify'.tr),
                         onPressed: () async {
-                          _controller.verifyCode(phoneNumber: widget.phoneNumber,credential: PhoneAuthProvider.credential(verificationId: _controller.verificationId.value, smsCode: _controller.controllerOtp.text));
+                          _controller.verifyCode(phoneNumber: widget.phoneNumber, credential: PhoneAuthProvider.credential(verificationId: _controller.verificationId.value, smsCode: _controller.controllerOtp.text));
                         },
                       ),
                       SizedBox(height: 20.h),

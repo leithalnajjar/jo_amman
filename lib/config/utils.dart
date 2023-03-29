@@ -13,6 +13,9 @@ import 'package:jo_amman/config/app_color.dart';
 import 'package:jo_amman/ui/widgets/custom_widget.dart';
 
 class Utils {
+  static double height = Get.height - MediaQuery.of(Get.context!).padding.top - MediaQuery.of(Get.context!).padding.bottom;
+  static double width = Get.width;
+
   static bool isNotEmpty(String? s) => s != null && s.isNotEmpty;
 
   static bool isEmpty(String? s) => s == null || s.isEmpty;
