@@ -11,10 +11,8 @@ class UserHomeController extends GetxController {
   final currentSlider = 0.obs;
 
   getSliders() async {
-    Utils.showLoadingDialog();
     var result = await ReferenceFirebase.GET_SLIDERS().get();
     sliders.value = result.docs.map((e) => e.data().url).toList();
     update();
-    Utils.hideLoadingDialog();
   }
 }

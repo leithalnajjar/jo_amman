@@ -10,23 +10,22 @@ String configModelToJson(ConfigModel data) => json.encode(data.toJson());
 
 class ConfigModel {
   ConfigModel({
-    required this.versionCode,
+    this.id = '',
     required this.price,
     required this.phone,
   });
 
-  int versionCode;
+  String id;
   double price;
   String phone;
 
   factory ConfigModel.fromJson(Map<String, dynamic> json) => ConfigModel(
-        versionCode: json["version_code"] ?? 0,
+        id: json["id"] ?? '',
         price: json["price"]?.toDouble() ?? 0,
         phone: json["phone"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
-        "version_code": versionCode,
         "price": price,
         "phone": phone,
       };

@@ -2,6 +2,7 @@ import 'package:jo_amman/config/constant.dart';
 import 'package:jo_amman/config/shared_prefs_client.dart';
 import 'package:jo_amman/config/utils.dart';
 import 'package:jo_amman/controllers/admin/admin_home_controller.dart';
+import 'package:jo_amman/ui/screens/admin/admin_config_screen.dart';
 import 'package:jo_amman/ui/screens/auth/sign_in_screen.dart';
 import 'package:jo_amman/ui/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +47,11 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(
-                          Icons.newspaper,
+                          Icons.remove_from_queue_sharp,
                           size: 50.sp,
                         ),
                         Text(
-                          'Journals'.tr,
+                          'Orders'.tr,
                           maxLines: 2,
                           textAlign: TextAlign.center,
                           style: kStyleTextTitle,
@@ -68,9 +69,71 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 elevation: 0,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(5.r),
-                  onTap: () async{
+                  onTap: () {
+                    // Get.to(() => const ScientificJournalsScreen());
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 2.w),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.slideshow,
+                          size: 50.sp,
+                        ),
+                        Text(
+                          'Sliders'.tr,
+                          maxLines: 2,
+                          textAlign: TextAlign.center,
+                          style: kStyleTextTitle,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                color: Colors.grey.shade200,
+                elevation: 0,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(5.r),
+                  onTap: () {
+                    Get.to(() => const AdminConfigScreen());
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 2.w),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.settings,
+                          size: 50.sp,
+                        ),
+                        Text(
+                          'Config'.tr,
+                          maxLines: 2,
+                          textAlign: TextAlign.center,
+                          style: kStyleTextTitle,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.r),
+                ),
+                color: Colors.grey.shade200,
+                elevation: 0,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(5.r),
+                  onTap: () async {
                     var result = await Utils.showAreYouSureDialog(title: 'Sign Out'.tr);
-                    if(result){
+                    if (result) {
                       sharedPrefsClient.clearProfile();
                       Get.offAll(() => const SignInScreen());
                     }

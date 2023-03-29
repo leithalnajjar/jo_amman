@@ -32,6 +32,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _controller.getSliders();
+      _controllerApp.getConfig();
     });
   }
 

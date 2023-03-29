@@ -72,7 +72,21 @@ class ReferenceFirebase {
 
   static Query<ConfigModel> GET_CONFIG() => FirebaseFirestore.instance.collection('config').withConverter<ConfigModel>(
       fromFirestore: (snapshot, options) {
-        return ConfigModel.fromJson(snapshot.data()!);
+        var model = ConfigModel.fromJson(snapshot.data()!);
+        model.id = snapshot.id;
+        return model;
       },
       toFirestore: (model, options) => model.toJson());
+
+
+  static DocumentReference<OrderModel> CHANGE_CONFIG(String id) => FirebaseFirestore.instance.collection('config').doc(id).withConverter<OrderModel>(
+      fromFirestore: (snapshot, options) {
+        var model = OrderModel.fromJson(snapshot.data()!);
+        model.id = snapshot.id;
+        return model;
+      },
+      toFirestore: (model, options) => model.toJson());
+
+
+
 }
