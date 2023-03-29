@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:jo_amman/models/user_model.dart';
 import 'package:jo_amman/networks/reference_firebase.dart';
 import 'package:jo_amman/ui/screens/admin/admin_home_screen.dart';
-import 'package:jo_amman/ui/screens/user/home_screen.dart';
+import 'package:jo_amman/ui/screens/user/user_home_screen.dart';
 
 class OtpController extends GetxController {
   static OtpController get to => Get.isRegistered<OtpController>() ? Get.find<OtpController>() : Get.put(OtpController());
@@ -52,17 +52,19 @@ class OtpController extends GetxController {
             log('user logged in');
             var result = await ReferenceFirebase.GET_USERS(phoneNumber).get();
             if (result.docs.isEmpty) {
-              ReferenceFirebase.USERS.add(UserModel(phoneNumber: phoneNumber, role: UserRoleEnum.user, isDeleted: false));
+              var resultAdd = await ReferenceFirebase.USERS.add(UserModel(phoneNumber: phoneNumber, role: UserRoleEnum.user, isDeleted: false));
+              sharedPrefsClient.id = resultAdd.id;
               sharedPrefsClient.phoneNumber = phoneNumber;
               sharedPrefsClient.isLogin = true;
               sharedPrefsClient.userRole = UserRoleEnum.user;
-              Get.offAll(() => const HomeScreen());
+              Get.offAll(() => const UserHomeScreen());
             } else {
+              sharedPrefsClient.id = result.docs.first.data().id;
               sharedPrefsClient.phoneNumber = phoneNumber;
               sharedPrefsClient.isLogin = true;
               sharedPrefsClient.userRole = result.docs.first.data().role;
               if (result.docs.first.data().role == UserRoleEnum.user) {
-                Get.offAll(() => const HomeScreen());
+                Get.offAll(() => const UserHomeScreen());
               } else if (result.docs.first.data().role == UserRoleEnum.admin) {
                 Get.offAll(() => const AdminHomeScreen());
               }

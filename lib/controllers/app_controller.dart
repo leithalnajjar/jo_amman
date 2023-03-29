@@ -2,13 +2,23 @@ import 'package:jo_amman/config/constant.dart';
 import 'package:jo_amman/config/shared_prefs_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:jo_amman/config/utils.dart';
 import 'package:jo_amman/models/config_model.dart';
+import 'package:jo_amman/networks/reference_firebase.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class AppController extends GetxController {
   static AppController get to => Get.isRegistered<AppController>() ? Get.find<AppController>() : Get.put(AppController());
 
   final config = ConfigModel.fromJson({}).obs;
+
+  getConfig() async {
+    Utils.showLoadingDialog();
+    var result = await ReferenceFirebase.GET_CONFIG().get();
+    config.value = result.docs.first.data();
+    update();
+    Utils.hideLoadingDialog();
+  }
 
   init() {
     /// Version

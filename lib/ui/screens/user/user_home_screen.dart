@@ -4,25 +4,26 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:jo_amman/config/app_color.dart';
+import 'package:jo_amman/config/constant.dart';
 import 'package:jo_amman/config/utils.dart';
 import 'package:jo_amman/controllers/app_controller.dart';
-import 'package:jo_amman/controllers/user/home_controller.dart';
+import 'package:jo_amman/controllers/user/user_home_controller.dart';
+import 'package:jo_amman/ui/screens/user/user_order_screen.dart';
 import 'package:jo_amman/ui/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class UserHomeScreen extends StatefulWidget {
+  const UserHomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<UserHomeScreen> createState() => _UserHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final _controller = HomeController.to;
+class _UserHomeScreenState extends State<UserHomeScreen> {
+  final _controller = UserHomeController.to;
   final _controllerApp = AppController.to;
 
   @override
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return CustomWidget(
-      child: GetBuilder<HomeController>(
+      child: GetBuilder<UserHomeController>(
         builder: (controller) => CustomSingleChildScrollView(
           padding: EdgeInsets.zero,
           child: Container(
@@ -101,10 +102,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 CustomButton(
                   margin: EdgeInsets.all(16.sp),
                   backgroundColor: AppColor.red,
-                  child: Text('الكمية'),
-                  onPressed: () {},
+                  child: Text(
+                    'الكمية',
+                    style: kStyleTextTitle,
+                  ),
+                  onPressed: () {
+                    Get.to(() => const UserOrderScreen());
+                  },
                 ),
-                SizedBox(height: 60.h),
+                SizedBox(height: 30.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -119,12 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: FittedBox(
                         child: Text(
                           "رنيت الديزل صار بالبيت",
-                          style: TextStyle(
-                            fontSize: 25.sp,
-                            fontFamily: 'Cairo',
-                            fontWeight: FontWeight.w100,
-                            color: const Color(0xff377C0F),
-                          ),
+                          style: kStyleTextTitle.copyWith(fontWeight: FontWeight.w100, color: const Color(0xff377C0F)),
                         ),
                       ),
                     ),

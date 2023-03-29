@@ -14,12 +14,19 @@ class SharedPrefsClient {
     isLogin = false;
     userRole = UserRoleEnum.unknown;
     phoneNumber = "";
+    id = "";
   }
 
   String get deviceToken => _storage.read(keyDeviceToken) ?? "";
 
   set deviceToken(String value) {
     _storage.write(keyDeviceToken, value);
+  }
+
+  String get id => _storage.read(keyId) ?? "";
+
+  set id(String value) {
+    _storage.write(keyId, value);
   }
 
   String get phoneNumber => _storage.read(keyPhoneNumber) ?? "";
@@ -56,6 +63,7 @@ class SharedPrefsClient {
 final sharedPrefsClient = SharedPrefsClient();
 
 const String keyDeviceToken = "key_device_token";
+const String keyId = "key_id";
 const String keyPhoneNumber = "key_phone_number";
 const String keyIsLogin = "key_is_login";
 const String keyLanguage = "key_language";

@@ -1,7 +1,7 @@
 import 'package:jo_amman/config/enum/user_role_enum.dart';
 import 'package:jo_amman/config/shared_prefs_client.dart';
 import 'package:jo_amman/ui/screens/admin/admin_home_screen.dart';
-import 'package:jo_amman/ui/screens/user/home_screen.dart';
+import 'package:jo_amman/ui/screens/user/user_home_screen.dart';
 import 'package:jo_amman/ui/screens/auth/sign_in_screen.dart';
 import 'package:jo_amman/ui/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       if (sharedPrefsClient.isLogin) {
         if (sharedPrefsClient.userRole == UserRoleEnum.user) {
-          Get.offAll(() => const HomeScreen());
+          Get.offAll(() => const UserHomeScreen());
         } else if (sharedPrefsClient.userRole == UserRoleEnum.admin) {
           Get.offAll(() => const AdminHomeScreen());
         }

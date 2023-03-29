@@ -133,13 +133,14 @@ class _OtpScreenState extends State<OtpScreen> {
             Padding(
               padding: EdgeInsets.all(8.0.sp),
               child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  )),
+                onPressed: () {
+                  Get.back();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ],
         ),
