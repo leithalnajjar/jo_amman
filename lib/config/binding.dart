@@ -1,5 +1,6 @@
 import 'package:jo_amman/controllers/admin/admin_config_controller.dart';
 import 'package:jo_amman/controllers/admin/admin_home_controller.dart';
+import 'package:jo_amman/controllers/admin/admin_sliders_controller.dart';
 import 'package:jo_amman/controllers/user/user_home_controller.dart';
 import 'package:jo_amman/controllers/auth/otp_controller.dart';
 import 'package:get/get.dart';
@@ -19,5 +20,6 @@ class Binding extends Bindings {
 
     Get.lazyPut(() => AdminHomeController());
     Get.lazyPut(() => AdminConfigController());
+    Get.lazyPut(() => AdminSlidersController());
   }
 }

@@ -70,6 +70,24 @@ class ReferenceFirebase {
       },
       toFirestore: (model, options) => model.toJson());
 
+  static Query<SliderModel> GET_SLIDERS_PAGINATION({int limit = 10, DocumentSnapshot<SliderModel>? startAt}) => startAt == null
+      ? FirebaseFirestore.instance.collection('sliders').where("is_deleted", isEqualTo: false).limit(limit).withConverter<SliderModel>(
+          fromFirestore: (snapshot, options) {
+            var model = SliderModel.fromJson(snapshot.data()!);
+            model.id = snapshot.id;
+            return model;
+          },
+          toFirestore: (model, options) => model.toJson())
+      : FirebaseFirestore.instance.collection('sliders').where("is_deleted", isEqualTo: false).startAtDocument(startAt).limit(limit).withConverter<SliderModel>(
+          fromFirestore: (snapshot, options) {
+            var model = SliderModel.fromJson(snapshot.data()!);
+            model.id = snapshot.id;
+            return model;
+          },
+          toFirestore: (model, options) => model.toJson());
+
+  static AggregateQuery GET_COUNT_SLIDERS() => FirebaseFirestore.instance.collection('sliders').where("is_deleted", isEqualTo: false).count();
+
   static Query<ConfigModel> GET_CONFIG() => FirebaseFirestore.instance.collection('config').withConverter<ConfigModel>(
       fromFirestore: (snapshot, options) {
         var model = ConfigModel.fromJson(snapshot.data()!);
@@ -78,7 +96,6 @@ class ReferenceFirebase {
       },
       toFirestore: (model, options) => model.toJson());
 
-
   static DocumentReference<OrderModel> CHANGE_CONFIG(String id) => FirebaseFirestore.instance.collection('config').doc(id).withConverter<OrderModel>(
       fromFirestore: (snapshot, options) {
         var model = OrderModel.fromJson(snapshot.data()!);
@@ -86,7 +103,4 @@ class ReferenceFirebase {
         return model;
       },
       toFirestore: (model, options) => model.toJson());
-
-
-
 }
